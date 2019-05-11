@@ -9,7 +9,7 @@ Pipeline{
 				 Stage('Compile source code')
 					{
 						Steps{
-							withMaven(maven: 'Maven')
+							withMaven(maven: 'Maven1')
 							{
 								sh 'mvn Compile'
 							}
@@ -19,7 +19,7 @@ Pipeline{
 					Stage('test source code')
 					{
 						Steps{
-							withMaven(maven: 'Maven')
+							withMaven(maven: 'Maven1')
 							{
 								sh 'mvn test'
 							}
@@ -28,7 +28,7 @@ Pipeline{
 					Stage('create package')
 					{
 						Steps{
-							withMaven(maven: 'Maven')
+							withMaven(maven: 'Maven1')
 							{
 								sh 'mvn package'
 							}
@@ -37,7 +37,7 @@ Pipeline{
 					Stage('install source code')
 					{
 						Steps{
-							withMaven(maven: 'Maven')
+							withMaven(maven: 'Maven1')
 							{
 								sh 'mvn install'
 							}
