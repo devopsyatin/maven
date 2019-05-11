@@ -3,7 +3,7 @@ pipeline{
 		    stages{
 			   stage ('SCM checkout')
 				{
-				git 'https://github.com/devopsyatin/maven.git'
+				git 'https://github.com/devopsyatin/maven'
 				 }
 				 
 				 stage ('Compile source code')
