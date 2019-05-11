@@ -3,7 +3,7 @@ Pipeline{
 		    Stages{
 			   Stage('SCM checkout')
 				{
-				git 'https://github.com/devopsyatin/jenkins-example.git'
+				git 'https://github.com/devopsyatin/maven.git'
 				 }
 				 
 				 Stage('Compile source code')
