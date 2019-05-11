@@ -1,14 +1,14 @@
 pipeline{
 	   any agent{
-		    Stages{
-			   Stage('SCM checkout')
+		    stages{
+			   stage('SCM checkout')
 				{
 				git 'https://github.com/devopsyatin/maven.git'
 				 }
 				 
-				 Stage('Compile source code')
+				 stage('Compile source code')
 					{
-						Steps{
+						steps{
 							withMaven(maven: 'Maven1')
 							{
 								sh 'mvn Compile'
@@ -16,27 +16,27 @@ pipeline{
 				     		     }
 								 
 								}
-					Stage('test source code')
+					stage('test source code')
 					{
-						Steps{
+						steps{
 							withMaven(maven: 'Maven1')
 							{
 								sh 'mvn test'
 							}
 				     		     }
 					}
-					Stage('create package')
+					stage('create package')
 					{
-						Steps{
+						steps{
 							withMaven(maven: 'Maven1')
 							{
 								sh 'mvn package'
 							}
 				     		     }
 					}
-					Stage('install source code')
+					stage('install source code')
 					{
-						Steps{
+						steps{
 							withMaven(maven: 'Maven1')
 							{
 								sh 'mvn install'
