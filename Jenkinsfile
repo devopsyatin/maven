@@ -1,42 +1,18 @@
 pipeline {
     agent any
-
-
     stages {
-        stage('SCM Checkout'){
-          git 'https://github.com/devopsyatin/maven.git'
-        }
-  }
-    {
-        stage ('Compile Stage') {
-
+        stage('SCM') {
             steps {
-                withMaven(maven : 'Maven1') {
-                    sh 'mvn clean compile'
+                git 'https://github.com/devopsyatin/maven.git'
+            }
+        }
+        stage('build && SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('My SonarQube Server') {
+                    // Optionally use a Maven environment you':ve configured already
+                    withMaven(maven:'Maven1') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
                 }
             }
         }
-
-        stage ('Testing Stage') {
-
-            steps {
-                withMaven(maven : 'Maven1') {
-                    sh 'mvn test'
-                }
-            }
-        }
-
-
-        stage('Sonarqube') {
-    steps {
-        withSonarQubeEnv('sonarpipeline') {
-		withMaven(maven: 'Maven1'){
-			sh 'mvn clean package sonar:sonar'
-	}
-	}
-    }
-	}
-	    
-         
-}
-}
