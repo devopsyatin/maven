@@ -27,20 +27,16 @@ pipeline {
         }
 
 
-        stage ('install Stage') {
-            steps {
-                withMaven(maven : 'Maven1') {
-                    sh 'mvn install'
-                }
-            }
-        }
-        stage ('deploy to tomcat') {
-            steps {
-				sshagent(['656e7d80-ed1f-45c4-80a2-051f2968c4bc']) {
-				sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@18.219.227.17:/var/lib/tomcat/webapps'
-                                                                   }
-            }
-        }
+        stage('Sonarqube') {
+    steps {
+        withSonarQubeEnv('sonarqube') {
+		withMaven(maven: 'Maven1'){
+			sh 'mvn clean package sonar:sonar'
+	}
+	}
+    }
+	}
+	    
          
 }
 }
