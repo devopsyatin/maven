@@ -35,6 +35,16 @@ pipeline {
             }
         }
         
+        stage ('sonar analysis') {
+            steps {
+		        withSonarQubeEnv('sonar') {
+		            withMaven(maven : 'Maven1') {
+		                sh 'mvn clean install sonar:sonar'
+					}
+				}
+		    }
+		}
+        
          
 }
 }
